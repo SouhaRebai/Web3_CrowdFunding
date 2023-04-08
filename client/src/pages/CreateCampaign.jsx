@@ -45,6 +45,8 @@ const CreateCampaign = () => {
             value={form.title}
             handleChange={() => {}}
           />
+          </div>
+          <div>
           <FormField 
             labelName="Story * "
             placeholder="Tell donators about more your campaign ... "
@@ -59,7 +61,30 @@ const CreateCampaign = () => {
             className='w-[40px] h-[40px] object-contain' />
                <h4 className='font-epilogue font-bold text-white text-[20px] ml-[25px]'>
                 You will get 100% of the raised amounts !! </h4>
-            </div>
+          </div>
+          <div className='flex flex-wrap gap-[40px]'>
+            <FormField 
+            labelName="Goal * "
+            placeholder="e.g. amount of ETH to raise"
+            inputType="text"
+            value={form.target}
+            handleChange={() => {}}
+          />
+            <FormField 
+            labelName="End date * "
+            placeholder="e.g. date for deadline "
+            inputType="date"
+            value={form.deadline}
+            handleChange={() => {}}
+          />
+          </div>
+          <div className="flex justify-center items-center mt-[40px]">
+            <CustomButton 
+              btnType="submit"
+              title="Submit new campaign"
+              styles="bg-[#1dc071]"
+            />
+          </div>
           </form>
     </div>
   )
