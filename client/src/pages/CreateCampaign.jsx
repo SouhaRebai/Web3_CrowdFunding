@@ -15,10 +15,18 @@ const CreateCampaign = () => {
     deadline:'',
     image:''
   });
+ //update every field accordingly: 
+ const handleFormFieldChange = (fieldName, e) => {
+  setForm({ ...form , [fieldName]: e.target.value})
+ }
 
-  const handleSubmit = () =>{
+ //transmit obtained value 
+  const handleSubmit = (e) =>{
+    e.preventDefault(); //prevent page reload after from submission
+    console.log(form);
 
   }
+  
   
   return (
     <div className="bg-[#1c1c24] flex justify-center items-center flex-col rounded-[10px] 
@@ -29,22 +37,22 @@ const CreateCampaign = () => {
           <h1 className='font-epilogue font-bold sm:text-[25px] text-[18px] leading-[38px] text-white'>Start a campaign</h1>
           </div>
 
-          <form onSubmit ='handleSubmit()' className='w-full mt-[65px] flex flex-col gap-[30px]'>
+          <form onSubmit = {handleSubmit} className='w-full mt-[65px] flex flex-col gap-[30px]'>
             <div className='flex flex-wrap gap-[40px]'>
             <FormField 
             labelName="Personal name * "
             placeholder="e.g. John Stevens"
             inputType="text"
             value={form.name}
-            handleChange={() => {}}
+            handleChange={(e) => handleFormFieldChange('name',e)}
           />
             <FormField 
             labelName="Campaign title * "
             placeholder="e.g. Stop waste "
             inputType="text"
             value={form.title}
-            handleChange={() => {}}
-          />
+            handleChange={(e) => handleFormFieldChange('title',e)}          
+            />
           </div>
           <div>
           <FormField 
@@ -52,8 +60,8 @@ const CreateCampaign = () => {
             placeholder="Tell donators about more your campaign ... "
             isTextArea
             value={form.description}
-            handleChange={() => {}}
-          />
+            handleChange={(e) => handleFormFieldChange('description',e)}      
+            />
           </div>
           <div className='w-full flex justify-start items-center p-4 
           bg-[#c59a06] h-[90px] rounded-[10px]'>
@@ -68,14 +76,23 @@ const CreateCampaign = () => {
             placeholder="e.g. amount of ETH to raise"
             inputType="text"
             value={form.target}
-            handleChange={() => {}}
+            handleChange={(e) => handleFormFieldChange('target',e)}
           />
             <FormField 
             labelName="End date * "
             placeholder="e.g. date for deadline "
             inputType="date"
             value={form.deadline}
-            handleChange={() => {}}
+            handleChange={(e) => handleFormFieldChange('deadline',e)}
+          />
+          </div>
+          <div>
+           <FormField 
+            labelName="Compaign image * "
+            placeholder="insert you image URL"
+            inputType="url"
+            value={form.image}
+            handleChange={(e) => handleFormFieldChange('image',e)}
           />
           </div>
           <div className="flex justify-center items-center mt-[40px]">
