@@ -28,7 +28,7 @@ const Navbar = () => {
         title= {address ? 'Create a new campaign' : "Connect wallet"}
         styles = {address ? 'bg-[#1dc071]' : 'bg-[#8c6dfd]'} 
         handleClick = {() => {
-          if (address) navigate ('reate-campaign')
+          if (address) navigate ('create-campaign')
           else connect();
         }}/>
         <Link to="/profile">
