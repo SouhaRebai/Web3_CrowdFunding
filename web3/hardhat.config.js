@@ -19,19 +19,7 @@ module.exports = {
       optimizer: {
         enabled: true,
         runs: 200,
-      },
-      metadata: {
-        bytecodeHash: 'none',
-        sourceMap: 'none',
-        abi: 'clear',
-        devdoc: {
-          methods: true,
-          params: true,
-        },
-        userdoc: {
-          methods: true,
-          params: true,
-        },
+      
       },
     },
   },
