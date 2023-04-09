@@ -1,7 +1,7 @@
 const helpers = require("@nomicfoundation/hardhat-network-helpers");
 
 async function init() {
-  const address = "0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199";
+  const address = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
 
   await helpers.setBalance(address, 1000 * 1e18);
 }
