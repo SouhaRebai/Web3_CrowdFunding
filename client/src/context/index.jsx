@@ -40,7 +40,7 @@ export const StateContextProvider = ({ children }) => {
           value={{ 
             address,
             contract,
-            //rename publish compaign to create compaign
+            //rename publish campaign to create campaign
             createCampaign: publishCampaign,
       
           }}

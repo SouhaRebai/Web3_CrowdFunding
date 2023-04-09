@@ -13,7 +13,7 @@
         },
         {
           "functionSelector": "0xc91aac9c",
-          "functionSignature": "createCompaign(address,string,string,uint256,uint256,string)"
+          "functionSignature": "createCampaign(address,string,string,uint256,uint256,string)"
         },
         {
           "functionSelector": "0x42a4fda8",

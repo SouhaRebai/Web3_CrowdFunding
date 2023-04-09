@@ -21,7 +21,7 @@ uint256 public numberOfCampaigns = 0;
 //we need to define functions that will allow us to put the contract to use
 //we need 'memory' keyword whenever we  have a string
 
-function createCompaign(address _owner, string memory _title, string memory _description, 
+function createCampaign(address _owner, string memory _title, string memory _description, 
 uint256 _target , uint256 _deadline, string memory _image) public returns (uint256){
 
 // polulate the campaign array as follows
@@ -67,7 +67,7 @@ function donateToCampaign(uint256 _id) public payable {
 
 function getDonators(uint256 _id) view public returns (address[] memory, uint256[] memory){
 
-    //return donators and their donations according to the compaign id given 
+    //return donators and their donations according to the campaign id given 
     return(campaigns[_id].donators, campaigns[_id].donations);
 }
 
