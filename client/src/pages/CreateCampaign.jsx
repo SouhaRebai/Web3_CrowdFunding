@@ -4,9 +4,14 @@ import  {ethers} from 'ethers';
 import {money} from '../assets';
 import { CustomButton, FormField } from '../components';
 import {checkIfImage} from '../utils';
+import { useStateContext } from '../context';
+
+ 
 const CreateCampaign = () => {
   const navigate = useNavigate();
-  const [loading , isLoading] = useState(false);
+  const [isLoading , setIsLoading] = useState(false);
+  //share data: create a context for each fonctionnality
+  const {createCampaign} = useStateContext();
   const [form, setForm] = useState({
     name:'',
     title:'',
@@ -20,13 +25,23 @@ const CreateCampaign = () => {
   setForm({ ...form , [fieldName]: e.target.value})
  }
 
- //transmit obtained value 
-  const handleSubmit = (e) =>{
+  const handleSubmit = async (e) => {
     e.preventDefault(); //prevent page reload after from submission
-    console.log(form);
 
+    checkIfImage(form.image, async (exists) => {
+      //async because smart contract calls take time
+      if(exists) {// a callback parameter to verify that an image exists
+        setIsLoading(true)
+
+        await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18)})
+        setIsLoading(false);
+        navigate('/');
+      } else {
+        alert('Provide a valid image URL')
+        setForm({ ...form, image: '' });
+      }
+    })
   }
-  
   
   return (
     <div className="bg-[#1c1c24] flex justify-center items-center flex-col rounded-[10px] 

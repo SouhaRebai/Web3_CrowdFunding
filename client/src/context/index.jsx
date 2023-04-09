@@ -8,7 +8,7 @@ const StateContext = createContext();
 export const StateContextProvider = ({ children }) => {
     
     //connect to the smart contract (locally deployed) by providing a contract address
-    const { contract } = useContract('0x031c0fEd46445543A3d6C3A2581a09Eb33ED7897')
+    const { contract } = useContract('0x5fbdb2315678afecb367f032d93f642f64180aa3')
     const { mutateAsync: createCampaign } = useContractWrite(contract, 'createCampaign');
     
     const address = useAddress();
@@ -50,3 +50,4 @@ export const StateContextProvider = ({ children }) => {
       )
 }
 // utilize context by creating a custom hook 
+export const useStateContext = () => useContext(StateContext);
