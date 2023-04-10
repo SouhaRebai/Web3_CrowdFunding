@@ -11,6 +11,7 @@
     "hardhat": "^2.10.1"
   },
   "dependencies": {
+    "@metamask/detect-provider": "^2.0.0",
     "@nomicfoundation/hardhat-network-helpers": "^1.0.8",
     "@thirdweb-dev/contracts": "^3",
     "dotenv": "^16.0.3",
