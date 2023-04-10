@@ -1,6 +1,6 @@
 import React, {useContext,createContext} from 'react';
-import {useAddress, useContract, useMetamask, useContractWrite} from '@thirdweb-dev/react';
-
+import {useAddress, useContract, useMetamask, useContractWrite , useContractRead} from '@thirdweb-dev/react';
+import {ethers} from 'ethers';
 const StateContext = createContext();
 
 //wrap entire app with context provider and render all the children inside of it.
@@ -33,6 +33,27 @@ export const StateContextProvider = ({ children }) => {
           console.log("contract call failure", error)
         }
       }
+
+      const getCampaigns = async () => {
+
+        const campaigns = await contract.call("getCampaigns");
+        //console.log(campaings);
+
+        const parsedCampaings = campaigns.map((campaign, i) => ({
+          owner: campaign.owner,
+          title: campaign.title,
+          description: campaign.description,
+          target: ethers.utils.formatEther(campaign.target.toString()),
+          deadline: campaign.deadline.toNumber(),
+          amountCollected: ethers.utils.formatEther(campaign.amountCollected.toString()),
+          image: campaign.image,
+          pId: i
+        }));
+        // console.log(parsedCampaings);
+        
+        return parsedCampaings;
+
+      }
     //pass the function from te context to the form using the return of context provider
     return (
         <StateContext.Provider
@@ -42,6 +63,7 @@ export const StateContextProvider = ({ children }) => {
             connect,
             //rename publish campaign to create campaign
             createCampaign: publishCampaign,
+            getCampaigns
       
           }}
         >
