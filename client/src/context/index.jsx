@@ -40,6 +40,7 @@ export const StateContextProvider = ({ children }) => {
         //console.log(campaings);
 
         const parsedCampaings = campaigns.map((campaign, i) => ({
+          //only display important elements + format big numbers to human readable numbers
           owner: campaign.owner,
           title: campaign.title,
           description: campaign.description,
@@ -47,10 +48,10 @@ export const StateContextProvider = ({ children }) => {
           deadline: campaign.deadline.toNumber(),
           amountCollected: ethers.utils.formatEther(campaign.amountCollected.toString()),
           image: campaign.image,
-          pId: i
+          pId: i // index to order campaigns
         }));
         // console.log(parsedCampaings);
-        
+
         return parsedCampaings;
 
       }
