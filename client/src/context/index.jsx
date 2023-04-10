@@ -58,9 +58,9 @@ export const StateContextProvider = ({ children }) => {
       //get only the campaigns of the logged in owner
       const getOwnerCampaigns = async () => {
         const allCampaigns = await getCampaigns();
-        const filterdCampaigns = allCampaigns.filter((campaign)=> {
-          campaign.owner === address
-        })
+        const filterdCampaigns = allCampaigns.filter((campaign)=> 
+          campaign.owner == address
+        )
         return filterdCampaigns;
       }
     //pass the function from te context to the form using the return of context provider
