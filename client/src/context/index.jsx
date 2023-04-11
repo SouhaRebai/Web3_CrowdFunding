@@ -67,17 +67,11 @@ export const StateContextProvider = ({ children }) => {
 
 
       const donateToACampaign = async (pId, amount ) => {
-        if (!pId) {
-          throw new Error("No pId provided");
-        }
         const data = await contract.call("donateToCampaign",pId,{value: ethers.utils.parseEther(amount)});
         return data;
       } 
 
       const getDonations = async (pId) => {
-        if (!pId) {
-          throw new Error("No pId provided");
-        }
         const donations = await contract.call("getDonators",pId)
         const numberOfDonations = donations[0].length;
 
