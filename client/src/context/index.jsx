@@ -39,16 +39,17 @@ export const StateContextProvider = ({ children }) => {
         const campaigns = await contract.call("getCampaigns");
         //console.log(campaings);
 
-        const parsedCampaings = campaigns.map((campaign, i) => ({
+        const parsedCampaings = campaigns.map((campaign, index) => ({
           //only display important elements + format big numbers to human readable numbers
+          pId: index,// index to order campaigns
           owner: campaign.owner,
           title: campaign.title,
           description: campaign.description,
           target: ethers.utils.formatEther(campaign.target.toString()),
           deadline: campaign.deadline.toNumber(),
           amountCollected: ethers.utils.formatEther(campaign.amountCollected.toString()),
-          image: campaign.image,
-          pId: i // index to order campaigns
+          image: campaign.image
+          
         }));
         // console.log(parsedCampaings);
 
@@ -63,7 +64,33 @@ export const StateContextProvider = ({ children }) => {
         )
         return filterdCampaigns;
       }
-    //pass the function from te context to the form using the return of context provider
+
+
+      const donateToACampaign = async (pId, amount ) => {
+        if (!pId) {
+          throw new Error("No pId provided");
+        }
+        const data = await contract.call("donateToCampaign",pId,{value: ethers.utils.parseEther(amount)});
+        return data;
+      } 
+
+      const getDonations = async (pId) => {
+        if (!pId) {
+          throw new Error("No pId provided");
+        }
+        const donations = await contract.call("getDonators",pId)
+        const numberOfDonations = donations[0].length;
+
+        const parsedDonations = [];
+        for (let i=0 ; i<numberOfDonations ; i++) {
+          parsedDonations.push({
+            donator: donations[0][i],
+            donation : ethers.utils.formatEther(donations[1][i].toString)
+          })
+        }
+        return parsedDonations;
+      }
+    //pass the function from te context to the form using the return of contexnumberOf Dot provider
     return (
         <StateContext.Provider
           value={{ 
@@ -73,7 +100,9 @@ export const StateContextProvider = ({ children }) => {
             //rename publish campaign to create campaign
             createCampaign: publishCampaign,
             getCampaigns,
-            getOwnerCampaigns
+            getOwnerCampaigns,
+            donateToACampaign,
+            getDonations
       
           }}
         >
